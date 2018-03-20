@@ -16,8 +16,8 @@ class App extends Component {
 
 		this.state = { videos: [] };
 
-		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
-			this.setState({ videos });
+		YTSearch({key: API_KEY, term: 'surfboards'}, (data) => {
+			this.setState({ videos: data });
 			// this.setState({ videos: videos });
 		});
 	}
@@ -26,7 +26,7 @@ class App extends Component {
 		return  (										// We use a parenthesis for multiline statements
 			<div>
 				<SearchBar />
-				<VideoList videos= {this.state.videos} />
+				<VideoList videos= {this.state.videos} />		// videos is the property name defined here on the JSX tag.
 			</div>
 		);
 	}
