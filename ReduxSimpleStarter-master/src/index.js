@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';		// Here path is necessary cause we could have 10 files named search_bar.js
 import VideoList from './components/video_list';		// No need to include the extension so long as it is a .js file
-
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyDgHUdrYu4C1j8Br4Tw3DhaslN_ralAMq8';
 
@@ -14,10 +14,16 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { videos: [] };
+		this.state = { 
+			videos: [],
+			selectedVideo: null
+		};
 
-		YTSearch({key: API_KEY, term: 'surfboards'}, (data) => {
-			this.setState({ videos: data });
+		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+			this.setState({ 
+				videos: videos,
+				selectedVideo: videos[0]
+			});
 			// this.setState({ videos: videos });
 		});
 	}
@@ -26,8 +32,11 @@ class App extends Component {
 		return  (										// We use a parenthesis for multiline statements
 			<div>
 				<SearchBar />
-				<VideoList videos= {this.state.videos} />		// videos is the property name defined here on the JSX tag.
-			</div>
+				<VideoDetail video={this.state.selectedVideo} />
+				<VideoList 
+					onVideoSelect = { selectedVideo => this.setState({selectedVideo}) }
+					videos= {this.state.videos} />	
+			</div>										// videos is the property name defined here on the JSX tag.
 		);
 	}
 }

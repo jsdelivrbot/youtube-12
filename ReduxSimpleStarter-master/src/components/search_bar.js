@@ -9,12 +9,12 @@ class SearchBar extends Component {			// Define a new class SearchBar & give it 
 
 	render() {								// Every class based React component that we create, should have a render method. It should return some JSX. Else it'll cause an error.
 		return (
-			<div>
+			<div>							
 				<input
 					value = { this.state.myText }
-					onChange = { (event) => this.setState({ myText: event.target.value })} />		// Whenever we write JSC with JS variables, we wrap it with curly braces.
+					onChange = { (event) => this.setState({ myText: event.target.value })} />
 			</div>							// Above event could be written without () too as it's a single argument.
-		);
+		);									// Whenever we write JSC with JS variables, we wrap it with curly braces.
 	}
 }
 
