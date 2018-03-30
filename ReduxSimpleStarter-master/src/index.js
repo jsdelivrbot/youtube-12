@@ -4,6 +4,7 @@ import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';		// Here path is necessary cause we could have 10 files named search_bar.js
 import VideoList from './components/video_list';		// No need to include the extension so long as it is a .js file
 import VideoDetail from './components/video_detail';
+import VideoListItem from './components/video_list_item';
 
 const API_KEY = 'AIzaSyDgHUdrYu4C1j8Br4Tw3DhaslN_ralAMq8';
 
@@ -19,7 +20,11 @@ class App extends Component {
 			selectedVideo: null
 		};
 
-		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+		this.videoSearch('surfboards');
+	}
+
+	videoSearch(term) {
+		YTSearch({key: API_KEY, term: term}, (videos) => {
 			this.setState({ 
 				videos: videos,
 				selectedVideo: videos[0]
@@ -29,10 +34,10 @@ class App extends Component {
 	}
 
 	render() {
-		return  (										// We use a parenthesis for multiline statements
+		return  (
 			<div>
-				<SearchBar />
-				<VideoDetail video={this.state.selectedVideo} />
+				<SearchBar onSearchTermChange = {term => this.videoSearch(term)} />
+				<VideoDetail video = {this.state.selectedVideo} />
 				<VideoList 
 					onVideoSelect = { selectedVideo => this.setState({selectedVideo}) }
 					videos= {this.state.videos} />	

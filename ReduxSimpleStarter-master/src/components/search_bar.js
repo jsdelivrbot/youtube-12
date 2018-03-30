@@ -4,17 +4,22 @@ class SearchBar extends Component {			// Define a new class SearchBar & give it 
 	constructor(props) {
 		super(props);
 
-		this.state = { myText: '' };		// This is the only time you should manually change state. When you render the component, use this.setState ALWAYS.
+		this.state = { term: '' };		// This is the only time you should manually change state. When you render the component, use this.setState ALWAYS.
 	}
 
 	render() {								// Every class based React component that we create, should have a render method. It should return some JSX. Else it'll cause an error.
 		return (
-			<div>							
+			<div className="search-bar">							
 				<input
 					value = { this.state.myText }
-					onChange = { (event) => this.setState({ myText: event.target.value })} />
+					onChange = { (event) => this.onInputChange(event.target.value)} />
 			</div>							// Above event could be written without () too as it's a single argument.
-		);									// Whenever we write JSC with JS variables, we wrap it with curly braces.
+		);									// Whenever we write JSX with JS variables, we wrap it with curly braces.
+	}
+
+	onInputChange(term) {
+		this.setState({term});
+		this.props.onSearchTermChange(term);
 	}
 }
 

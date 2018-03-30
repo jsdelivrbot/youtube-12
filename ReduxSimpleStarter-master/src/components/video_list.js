@@ -6,7 +6,7 @@ const VideoList = (props) => {							// When we use a functional component, this
 	const videoItems = props.videos.map((video) => {
 		return (
 			<VideoListItem
-			onVideoClick = {props.onVideoSelect}
+			onVideoSelect = {props.onVideoSelect}
 			key = {video.etag}
 			video = {video} />
 		);
